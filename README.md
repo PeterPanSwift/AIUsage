@@ -15,9 +15,9 @@
 
 🇺🇸 **English** · [🇹🇼 繁體中文](#zh-tw)
 
-<img src="docs/control-center.png" alt="AI Usage controls inside macOS Control Center" width="360">
-
 <img src="docs/fn-c-control-center.png" alt="Press fn + C to open Control Center and check AI usage" width="720">
+
+<img src="docs/control-center.png" alt="AI Usage controls inside macOS Control Center" width="360">
 
 </div>
 
