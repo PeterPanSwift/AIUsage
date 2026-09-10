@@ -33,7 +33,7 @@
 3. Make sure the CLIs are installed and logged in:
    - Codex: `codex login`
    - Claude Code: `claude` (log in once)
-   - Antigravity: `/Applications/agy-usage/agy-usage login`
+   - Antigravity: `/Applications/agy-usage/agy-usage login` (install [agy-usage](https://github.com/orrisroot/agy-usage) by orrisroot first)
 4. Open Control Center, click **Edit Controls**, search for **AI Usage** and add the controls you want.
 5. 💡 Resize each control to the wide pill size (drag the handle at its bottom-right corner). The small circle shows only an icon. The wide size shows the title with the percentage.
 
@@ -46,7 +46,7 @@
 | Antigravity Gemini | 5 hours · weekly | `agy-usage quota --json` |
 | Antigravity Claude／GPT | 5 hours · weekly | `agy-usage quota --json` |
 
-Missing quotas show `—` instead of 0%. Values older than 10 minutes or past their reset time are labelled as stale rather than assumed to be zero.
+Antigravity data comes from [agy-usage](https://github.com/orrisroot/agy-usage), an open-source CLI by orrisroot. Missing quotas show `—` instead of 0%. Values older than 10 minutes or past their reset time are labelled as stale rather than assumed to be zero.
 
 ## 🛠 Build from source
 
@@ -103,7 +103,7 @@ swift run usage-probe
 3. 確認 CLI 已安裝並登入：
    - Codex：`codex login`
    - Claude Code：執行 `claude` 登入一次
-   - Antigravity：`/Applications/agy-usage/agy-usage login`
+   - Antigravity：`/Applications/agy-usage/agy-usage login`（請先安裝 orrisroot 的 [agy-usage](https://github.com/orrisroot/agy-usage)）
 4. 打開控制中心，按「**編輯控制項目**」，搜尋 **AI Usage**，加入需要的控制項。
 5. 💡 把每個控制項拖成寬的膠囊尺寸（拖右下角的把手）。小圓形只顯示圖示，寬尺寸才會顯示標題與百分比。
 
@@ -116,7 +116,7 @@ swift run usage-probe
 | Antigravity Gemini | 5 小時 · 每週 | `agy-usage quota --json` |
 | Antigravity Claude／GPT | 5 小時 · 每週 | `agy-usage quota --json` |
 
-沒有提供的額度顯示「—」而不是 0%。超過 10 分鐘或已到重置時間的數值會標記為舊資料，不會假設已歸零。
+Antigravity 的資料來自 orrisroot 開源的 [agy-usage](https://github.com/orrisroot/agy-usage) CLI。沒有提供的額度顯示「—」而不是 0%。超過 10 分鐘或已到重置時間的數值會標記為舊資料，不會假設已歸零。
 
 ## 🛠 從原始碼建置
 
