@@ -36,6 +36,7 @@
    - Antigravity: `/Applications/agy-usage/agy-usage login` (install [agy-usage](https://github.com/orrisroot/agy-usage) by orrisroot first)
 4. Open Control Center, click **Edit Controls**, search for **AI Usage** and add the controls you want.
 5. 💡 Resize each control to the wide pill size (drag the handle at its bottom-right corner). The small circle shows only an icon. The wide size shows the title with the percentage.
+6. ⌨️ Press **fn + C** any time to open Control Center and check your AI usage in one keystroke.
 
 ## 🧩 Controls
 
@@ -106,6 +107,7 @@ swift run usage-probe
    - Antigravity：`/Applications/agy-usage/agy-usage login`（請先安裝 orrisroot 的 [agy-usage](https://github.com/orrisroot/agy-usage)）
 4. 打開控制中心，按「**編輯控制項目**」，搜尋 **AI Usage**，加入需要的控制項。
 5. 💡 把每個控制項拖成寬的膠囊尺寸（拖右下角的把手）。小圓形只顯示圖示，寬尺寸才會顯示標題與百分比。
+6. ⌨️ 之後隨時按 **fn + C** 就能一鍵打開控制中心查看 AI 用量。
 
 ## 🧩 控制項
 
