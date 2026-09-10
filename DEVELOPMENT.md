@@ -4,6 +4,8 @@ SwiftUI 選單列 App，加上八個 WidgetKit `ControlWidget`：Codex、Claude 
 
 ## 執行
 
+目前穩定執行版本安裝於 `/Applications/AIUsage.app`。日常使用請開啟此版本，避免同時執行 build 資料夾中的同 bundle ID 副本。
+
 1. 使用 Xcode 27 開啟 `AIUsage.xcodeproj`。
 2. 在專案 Signing & Capabilities 選擇自己的 Development Team，讓兩個 target 使用同一團隊。
 3. 執行 `AIUsage` scheme。請先在終端機完成 `codex login`、Claude Code 登入，以及 `/Applications/agy-usage/agy-usage login`。
@@ -71,3 +73,13 @@ Antigravity 更新驗證（2026-09-10）：簽署建置成功，13 項測試通�
 主 App 與 Widget 擴充功能是獨立程序，重啟主 App 不會更新仍在執行的擴充功能。新增控制項種類時，同步提高兩個 Info.plist 的 `CFBundleShortVersionString` 與 `CFBundleVersion`，重新建置並結束舊的 `AIUsageControls` 程序。可使用 `pluginkit -a` 重新登錄產物內的 `.appex`；若資料庫仍保留舊清單，再重新啟動 ControlCenter 並開啟資料庫。不要刪除使用者的控制中心配置或共享用量快取。
 
 本次修正為 `1.1 (2)`：確認原擴充程序在 16:42 啟動，早於 16:51 的 Antigravity 建置。更新版本、重新登錄及重啟後，16:55 的 ControlCenter 系統記錄對 Antigravity 四個種類均回報 `Content load successful`、`hasError? false` 與 `Received initial update`，證實新控制項的資料庫預覽已載入。加入後的實際值與點擊仍是另一項驗收。
+
+### 主 App 已更新，控制中心卻停在舊數值
+
+`1.1.1 (3)` 修正：20:45 的 chronod 記錄顯示擴充程序工作階段被拒絕（`Client not authorized`／`Unknown extension process`），接著排程延後重試；控制中心因此繼續顯示重置前的 100%，而非把已使用／剩餘額度反轉。重新建置時仍存活的程序及其登錄狀態需要一併更新。
+
+完成簽署後，結束主 App 與 AIUsageControls，將完整 App 安裝至固定的 `/Applications/AIUsage.app`；重新登錄該路徑內的擴充功能，移除 build 副本的 PluginKit 登錄，再啟動已安裝版本。之後重新建置不要直接覆寫仍在執行的安裝版本；先完成建置與簽署，再停止舊程序、備份舊 App 並替換。不要刪除使用者的控制項配置或用量快取。
+
+主 App 現在等待三家請求結束，原子寫入完整快取後只呼叫一次 `reloadAllControls()`，避免每個來源完成時重複重載全部控制項。加入 `local.aiusage` subsystem 記錄快取發布與擴充功能讀取時間，可用 Console 或 `log show --info` 診斷同步；不記錄原始 CLI 輸出或憑證。
+
+驗證：14 項測試通過（含快取從 100% 重置至 0%）；安裝後連續兩次更新均由擴充功能在一秒內讀到新時間戳，未再出現上述拒絕錯誤。20:49 手動更新後主 App 與控制中心 Codex 5 小時皆顯示 28%，不再停留於 100%。

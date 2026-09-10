@@ -1,9 +1,11 @@
 import Foundation
 import Observation
 import WidgetKit
+import OSLog
 
 @MainActor @Observable
 final class UsageStore {
+    private let logger = Logger(subsystem: "local.aiusage", category: "refresh")
     static let shared = UsageStore()
     var snapshot = UsageSnapshot()
     var refreshing = false
@@ -46,12 +48,19 @@ final class UsageStore {
             for await (service, usage, error) in group {
                 if let usage { snapshot[service] = usage }
                 else { snapshot[service].error = error }
-                do {
-                    try UsageCache.shared().write(snapshot)
-                    cacheError = nil
-                    ControlCenter.shared.reloadAllControls()
-                } catch { cacheError = error.localizedDescription }
             }
+        }
+        // Publish one complete snapshot before asking the extension to read it.
+        // Reloading all controls after each provider completed created bursts of
+        // redundant reloads and let controls observe different partial snapshots.
+        do {
+            try UsageCache.shared().write(snapshot)
+            cacheError = nil
+            ControlCenter.shared.reloadAllControls()
+            logger.info("Published complete usage snapshot; requested one controls reload")
+        } catch {
+            cacheError = error.localizedDescription
+            logger.error("Could not publish shared usage snapshot: \(error.localizedDescription)")
         }
     }
 }

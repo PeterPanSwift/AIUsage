@@ -146,3 +146,20 @@ private func antigravityEnvelope(remaining: String = "0.75", disabled: String = 
     failed.error = "Offline"
     #expect(failed.percentText(.weekly, groupID: "gemini", at: now).contains("舊資料"))
 }
+
+@Test func cacheReaderSeesResetFromFullToZero() throws {
+    let directory = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+    defer { try? FileManager.default.removeItem(at: directory) }
+    let writer = UsageCache(fileURL: directory.appendingPathComponent("usage.json"))
+    let reader = UsageCache(fileURL: writer.fileURL)
+    var snapshot = UsageSnapshot()
+    snapshot.codex = ServiceUsage(windows: [.init(usedPercent: 100, windowDurationMins: 300, resetsAt: now)], updatedAt: now.addingTimeInterval(-300))
+    try writer.write(snapshot)
+    #expect(try reader.read().codex.window(.fiveHours)?.usedPercent == 100)
+    snapshot.codex = ServiceUsage(windows: [.init(usedPercent: 0, windowDurationMins: 300, resetsAt: now.addingTimeInterval(18000))], updatedAt: now)
+    try writer.write(snapshot)
+    let refreshed = try reader.read().codex
+    #expect(refreshed.percentText(.fiveHours, at: now) == "0%")
+    #expect(refreshed.updatedAt == now)
+    #expect(refreshed.window(.fiveHours)?.resetsAt == now.addingTimeInterval(18000))
+}

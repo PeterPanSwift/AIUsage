@@ -1,5 +1,6 @@
 import SwiftUI
 import WidgetKit
+import OSLog
 
 @main
 struct UsageControls: WidgetBundle {
@@ -26,7 +27,10 @@ struct UsageControlValueProvider: ControlValueProvider {
         ] : nil)
     }
     func currentValue() async throws -> ServiceUsage {
-        try UsageCache.shared().read()[service]
+        let value = try UsageCache.shared().read()[service]
+        Logger(subsystem: "local.aiusage", category: "controls")
+            .info("Read shared snapshot for \(service.rawValue, privacy: .public), updatedAt: \(value.updatedAt?.timeIntervalSince1970 ?? 0, privacy: .public)")
+        return value
     }
 }
 
