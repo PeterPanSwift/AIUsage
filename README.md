@@ -29,7 +29,7 @@
 ## 📥 Install
 
 1. Download `AIUsage-<version>.zip` from the [latest release](https://github.com/PeterPanSwift/AIUsage/releases/latest). The app is signed with a Developer ID and notarized by Apple.
-2. Unzip and move **AI Usage.app** to `/Applications`, then launch it.
+2. Unzip and move **AIUsage.app** to `/Applications`, then launch it.
 3. Make sure the CLIs are installed and logged in:
    - Codex: `codex login`
    - Claude Code: `claude` (log in once)
@@ -99,7 +99,7 @@ swift run usage-probe
 ## 📥 安裝
 
 1. 到 [最新版本](https://github.com/PeterPanSwift/AIUsage/releases/latest) 下載 `AIUsage-<版本>.zip`。App 已用 Developer ID 簽署並經 Apple 公證。
-2. 解壓縮後把 **AI Usage.app** 移到「應用程式」，然後開啟。
+2. 解壓縮後把 **AIUsage.app** 移到「應用程式」，然後開啟。
 3. 確認 CLI 已安裝並登入：
    - Codex：`codex login`
    - Claude Code：執行 `claude` 登入一次
