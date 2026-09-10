@@ -13,7 +13,7 @@
 [![Downloads](https://img.shields.io/github/downloads/PeterPanSwift/AIUsage/total?color=blue)](https://github.com/PeterPanSwift/AIUsage/releases)
 [![Notarized](https://img.shields.io/badge/Developer%20ID-notarized-34C759?logo=apple&logoColor=white)](#-install)
 
-🇺🇸 **English** · [🇹🇼 繁體中文](#繁體中文)
+🇺🇸 **English** · [🇹🇼 繁體中文](#zh-tw)
 
 <img src="docs/control-center.png" alt="AI Usage controls inside macOS Control Center" width="420">
 
@@ -77,7 +77,7 @@ swift run usage-probe
 
 ---
 
-<a id="繁體中文"></a>
+<a id="zh-tw"></a>
 
 <div align="center">
 
